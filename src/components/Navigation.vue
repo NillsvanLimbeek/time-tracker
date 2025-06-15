@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import { LINKS } from "../lib/constants/links";
-import { useRoute } from "vue-router";
-
 const route = useRoute();
 
-function setVariant(link: string): "subtle" | "solid" {
-  if (route.fullPath !== link) return "subtle";
+function setVariant(link: string): 'subtle' | 'solid' {
+  if (route.fullPath !== link) {
+    return 'subtle';
+  }
 
-  return "solid";
+  return 'solid';
 }
 </script>
 

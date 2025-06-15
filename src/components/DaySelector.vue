@@ -1,19 +1,10 @@
 <script setup lang="ts">
-import {
-  eachDayOfInterval,
-  endOfWeek,
-  format,
-  isSameDay,
-  startOfWeek,
-} from "date-fns";
-import { computed } from "vue";
-
 const props = defineProps<{
   selectedDate: Date;
 }>();
 
 const emit = defineEmits<{
-  (e: "update:selectedDate", date: Date): void;
+  (e: 'update:selectedDate', date: Date): void;
 }>();
 
 const dates = computed(() => {
@@ -34,10 +25,10 @@ const dates = computed(() => {
       @click="emit('update:selectedDate', date)"
     >
       <span class="text-xs font-medium">
-        {{ format(date, "EEE") }}
+        {{ format(date, 'EEE') }}
       </span>
       <span class="text-xl font-bold">
-        {{ format(date, "d") }}
+        {{ format(date, 'd') }}
       </span>
     </UButton>
   </div>
