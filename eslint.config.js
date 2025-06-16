@@ -12,6 +12,8 @@ export default antfu(
   {
     rules: {
       'style/arrow-parens': 'off',
+      'ts/explicit-function-return-type': 'error',
+      'style/operator-linebreak': 'off',
     },
   },
 );

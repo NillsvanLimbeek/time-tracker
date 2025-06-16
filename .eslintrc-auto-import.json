@@ -357,6 +357,7 @@
     "useLocale": true,
     "useModel": true,
     "useOverlay": true,
+    "usePocketbase": true,
     "usePortal": true,
     "useRoute": true,
     "useRouter": true,
