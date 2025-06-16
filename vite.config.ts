@@ -18,7 +18,11 @@ export default defineConfig({
       },
       autoImport: {
         imports: ['vue', 'date-fns', VueRouterAutoImports],
-        dirs: ['./src/lib/constants/**'],
+        dirs: [
+          './src/lib/constants/**',
+          './src/lib/models/**',
+          './src/utils/**',
+        ],
         vueTemplate: true,
         dts: true,
         eslintrc: {
