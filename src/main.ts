@@ -1,14 +1,17 @@
-import "./assets/main.css";
+import ui from '@nuxt/ui/vue-plugin';
 
-import { createApp } from "vue";
-import { router } from "./router.ts";
-import uiPlugin from "@nuxt/ui/vue-plugin";
+import { createPinia } from 'pinia';
+import { createApp } from 'vue';
+import App from './App.vue';
+import { router } from './router.ts';
 
-import App from "./App.vue";
+import './assets/main.css';
 
 const app = createApp(App);
+const pinia = createPinia();
 
-app.use(uiPlugin);
+app.use(ui);
 app.use(router);
+app.use(pinia);
 
-app.mount("#app");
+app.mount('#app');

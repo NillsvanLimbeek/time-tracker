@@ -9,5 +9,9 @@ export default antfu(
       quotes: 'single',
     },
   },
-  {},
+  {
+    rules: {
+      'style/arrow-parens': 'off',
+    },
+  },
 );

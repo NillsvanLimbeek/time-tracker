@@ -3,10 +3,12 @@ import vue from '@vitejs/plugin-vue';
 import { VueRouterAutoImports } from 'unplugin-vue-router';
 import VueRouter from 'unplugin-vue-router/vite';
 import { defineConfig } from 'vite';
+import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    vueDevTools(),
     VueRouter(),
     vue(),
     ui({
@@ -17,10 +19,11 @@ export default defineConfig({
         },
       },
       autoImport: {
-        imports: ['vue', 'date-fns', VueRouterAutoImports],
+        imports: ['vue', 'pinia', 'date-fns', VueRouterAutoImports],
         dirs: [
           './src/lib/constants/**',
           './src/lib/models/**',
+          './src/lib/stores/**',
           './src/utils/**',
         ],
         vueTemplate: true,
