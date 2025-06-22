@@ -1,14 +1,24 @@
+import { z } from 'zod/v4';
+
 export const useEntriesStore = defineStore('time-entries', () => {
   const pb = usePocketbase();
   const entries = ref<TimeEntry[]>([]);
 
   async function getTimeEntries(): Promise<void> {
     const res = await pb.collection('time_entries').getFullList();
-    entries.value = res;
+
+    try {
+      TimeEntryResponse.parse(res);
+      entries.value = res;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        console.warn(error);
+      }
+    }
   }
 
-  function addTimeEntry(entry: TimeEntry): void {
-    entries.value.push(entry);
+  function addTimeEntry(entry: CreateTimeEntry): void {
+    console.log(entry);
   }
 
   return {

@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
 
-export const useTimerStore = defineStore("timer", () => {
+export const useTimerStore = defineStore('timer', () => {
   const seconds = ref<number>(0);
   const isRunning = ref<boolean>(false);
   let intervalId: number | null = null;
@@ -11,7 +11,7 @@ export const useTimerStore = defineStore("timer", () => {
     const minutes = Math.floor((seconds.value % 3600) / 60);
     const secs = seconds.value % 60;
 
-    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   });
 
   function startTimer(): void {

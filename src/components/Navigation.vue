@@ -12,7 +12,10 @@ function setVariant(link: string): 'subtle' | 'solid' {
 
 <template>
   <div class="flex justify-center">
-    <UButtonGroup size="md" class="w-full rounded-sm">
+    <UButtonGroup
+      size="md"
+      class="w-full rounded-sm"
+    >
       <UButton
         v-for="link in LINKS"
         :key="link.to"

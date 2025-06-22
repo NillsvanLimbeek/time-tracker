@@ -14,6 +14,8 @@ export default antfu(
       'style/arrow-parens': 'off',
       'ts/explicit-function-return-type': 'error',
       'style/operator-linebreak': 'off',
+      'style/brace-style': 'off',
+      'vue/max-attributes-per-line': ['error', { singleline: { max: 1 } }],
     },
   },
 );

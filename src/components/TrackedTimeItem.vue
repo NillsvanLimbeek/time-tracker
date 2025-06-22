@@ -10,14 +10,24 @@ function handleClick(event: 'start' | 'edit' | 'delete'): void {
 </script>
 
 <template>
-  <UCard variant="soft" class="border border-gray-700">
+  <UCard
+    variant="soft"
+    class="border border-gray-700"
+  >
     <div class="flex items-center justify-between">
       <div class="flex items-center">
-        <div class="mr-5 h-4 w-4 rounded-full" :class="entry.color" />
+        <div
+          class="mr-5 h-4 w-4 rounded-full"
+          :class="entry.color"
+        />
 
         <div>
-          <h2 class="font-bold">{{ entry.description }}</h2>
-          <p class="text-md font-light">{{ entry.project }}</p>
+          <h2 class="font-bold">
+            {{ entry.description }}
+          </h2>
+          <p class="text-md font-light">
+            {{ entry.project }}
+          </p>
         </div>
       </div>
 

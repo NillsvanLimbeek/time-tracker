@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui';
+import type { CreateTimeEntry } from '../../lib/models/TimeEntry';
 
 const emit = defineEmits<{
-  (e: 'submit', data: TimeEntry): void;
+  (e: 'submit', data: CreateTimeEntry): void;
 }>();
 
 const dateStore = useDateStore();
@@ -14,11 +15,10 @@ const state = reactive<Partial<AddEntry>>({
 });
 
 function onSubmit(event: FormSubmitEvent<AddEntry>): void {
-  const entry: TimeEntry = {
+  const entry: CreateTimeEntry = {
     color: getColor(event.data.project),
-    date: dateStore.currentDate,
+    date: dateStore.currentDate.toUTCString(),
     description: event.data.workingOn,
-    id: crypto.randomUUID(),
     project: event.data.project,
     time: timerStore.seconds,
   };
@@ -26,7 +26,7 @@ function onSubmit(event: FormSubmitEvent<AddEntry>): void {
   emit('submit', entry);
 }
 
-function getColor(value: string | undefined): string {
+function getColor(value: string | undefined): `bg-${string}-400` {
   if (!value) {
     return 'bg-gray-400';
   }
@@ -49,7 +49,10 @@ function getColor(value: string | undefined): string {
     @submit="onSubmit"
   >
     <div class="flex gap-2">
-      <UFormField name="project" class="w-full">
+      <UFormField
+        name="project"
+        class="w-full"
+      >
         <USelect
           v-model="state.project"
           placeholder="Select a project"
@@ -73,7 +76,10 @@ function getColor(value: string | undefined): string {
         </USelect>
       </UFormField>
 
-      <UFormField name="workingOn" class="w-full">
+      <UFormField
+        name="workingOn"
+        class="w-full"
+      >
         <UInput
           v-model="state.workingOn"
           class="w-full"

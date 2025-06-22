@@ -5,7 +5,10 @@ const entriesStore = useEntriesStore();
 <template>
   <UApp>
     <nav class="mx-auto mt-5 w-2/3">
-      <UCard variant="soft" class="mb-3">
+      <UCard
+        variant="soft"
+        class="mb-3"
+      >
         <DaySelector :selected-date="new Date()" />
         <Navigation />
       </UCard>
