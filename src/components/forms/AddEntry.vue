@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui';
-import type { CreateTimeEntry } from '../../lib/models/TimeEntry';
 
 const emit = defineEmits<{
   (e: 'submit', data: CreateTimeEntry): void;
@@ -23,6 +22,8 @@ function onSubmit(event: FormSubmitEvent<AddEntry>): void {
     time: timerStore.seconds,
   };
 
+  // TODO: check with zod
+
   emit('submit', entry);
 }
 
@@ -44,7 +45,7 @@ function getColor(value: string | undefined): `bg-${string}-400` {
 <template>
   <UForm
     :schema="AddEntrySchema"
-    :state="state"
+    :state
     class="flex flex-col gap-3"
     @submit="onSubmit"
   >

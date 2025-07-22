@@ -6,7 +6,6 @@ export default antfu(
     vue: true,
     stylistic: {
       semi: true,
-      quotes: 'single',
     },
   },
   {

@@ -1,10 +1,11 @@
 import type { RecordService } from 'pocketbase';
-import type { TimeEntry } from '../models/TimeEntry';
 import PocketBase from 'pocketbase';
 
 interface TypedPocketBase extends PocketBase {
   collection: ((name: string) => RecordService) &
-    ((name: 'time_entries') => RecordService<TimeEntry>);
+  ((name: 'time_entries') => RecordService<TimeEntry>) &
+  ((name: 'projects') => RecordService<Project>);
+
 }
 
 const pb = new PocketBase(
