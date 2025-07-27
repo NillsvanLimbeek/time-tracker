@@ -24,6 +24,7 @@ export default defineConfig({
           './src/lib/constants/**',
           './src/lib/models/**',
           './src/lib/stores/**',
+          './src/lib/mock/**/*',
           './src/lib/composables/**',
           './src/utils/**',
           './src/components/**/*',

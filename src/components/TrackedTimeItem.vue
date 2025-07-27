@@ -1,8 +1,17 @@
 <script setup lang="ts">
-const { entry } = defineProps<{ entry: TimeEntry }>();
+interface Props {
+  entry: TimeEntry;
+}
+
+const { entry } = defineProps<Props>();
 const emit = defineEmits<{
   (e: 'start' | 'edit' | 'delete', id: string): void;
 }>();
+
+const projectStore = useProjectsStore();
+const { findProject } = projectStore;
+
+const project = ref(findProject(entry.project));
 
 function handleClick(event: 'start' | 'edit' | 'delete'): void {
   emit(event, entry.id);
@@ -13,6 +22,7 @@ function handleClick(event: 'start' | 'edit' | 'delete'): void {
   <UCard
     variant="soft"
     class="border border-gray-700"
+    :ui="{ body: 'p-4 sm:p-4' }"
   >
     <div class="flex items-center justify-between">
       <div class="flex items-center">
@@ -25,8 +35,12 @@ function handleClick(event: 'start' | 'edit' | 'delete'): void {
           <h2 class="font-bold">
             {{ entry.description }}
           </h2>
-          <p class="text-md font-light">
-            {{ entry.project }}
+
+          <p
+            v-if="project"
+            class="text-md font-light"
+          >
+            {{ project.name }}
           </p>
         </div>
       </div>

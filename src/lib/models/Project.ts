@@ -6,6 +6,7 @@ export const ProjectSchema = z.object({
   color: z.templateLiteral(['bg-', z.string(), '-400']),
   created: z.string(),
   updated: z.string(),
+  time_entries: z.array(z.string()),
 });
 
 export const ProjectResponse = z.array(ProjectSchema);

@@ -5,7 +5,7 @@ export const useEntriesStore = defineStore('time-entries', () => {
   const entries = ref<TimeEntry[]>([]);
 
   async function getTimeEntries(): Promise<void> {
-    const res = await pb.collection('time_entries').getFullList();
+    const res = await pb.collection('time_entries').getFullList({ expand: 'project.id' });
 
     try {
       TimeEntryResponse.parse(res);

@@ -5,7 +5,7 @@ export const useProjectsStore = defineStore('projects', () => {
   const projects = ref<Project[]>([]);
 
   async function getProjects(): Promise<void> {
-    const res = await pb.collection('projects').getFullList();
+    const res = await pb.collection('projects').getFullList({ expand: 'time_entries.id' });
 
     try {
       ProjectResponse.parse(res);
@@ -21,10 +21,25 @@ export const useProjectsStore = defineStore('projects', () => {
     console.log(project);
   }
 
+  function findProject(id: string): Project | null {
+    if (!id) {
+      return null;
+    }
+
+    const project = projects.value.find(project => project.id === id);
+
+    if (!project) {
+      throw new Error(`no project with id: ${id} found`);
+    }
+
+    return project;
+  }
+
   return {
     projects,
 
     getProjects,
     addProject,
+    findProject,
   };
 });

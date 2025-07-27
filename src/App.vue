@@ -5,12 +5,15 @@ const entriesStore = useEntriesStore();
 const { getTimeEntries } = entriesStore;
 
 const projectStore = useProjectsStore();
-const { addProject } = projectStore;
+const { getProjects, addProject } = projectStore;
 
 const overlay = useOverlay();
 const addProjectModal = overlay.create(AddProject);
 
-onMounted(() => getTimeEntries());
+onMounted(() => {
+  getProjects();
+  getTimeEntries();
+});
 </script>
 
 <template>

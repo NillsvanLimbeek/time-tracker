@@ -10,7 +10,7 @@ export default antfu(
   },
   {
     rules: {
-      'style/arrow-parens': 'off',
+      'style/arrow-parens': 'error',
       'ts/explicit-function-return-type': 'error',
       'style/operator-linebreak': 'off',
       'style/brace-style': 'off',
