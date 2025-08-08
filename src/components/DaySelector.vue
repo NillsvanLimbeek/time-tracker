@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const props = defineProps<{
+interface Props {
   selectedDate: Date;
-}>();
+}
+const props = defineProps<Props>();
 
 const emit = defineEmits<{
   (e: 'update:selectedDate', date: Date): void;

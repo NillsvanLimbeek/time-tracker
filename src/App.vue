@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import AddProject from './components/modals/AddProject.vue';
 
+const dateStore = useDateStore();
+const { currentDate } = storeToRefs(dateStore);
+const { setCurrentDate } = dateStore;
+
 const entriesStore = useEntriesStore();
 const { getTimeEntries } = entriesStore;
+const { entries } = storeToRefs(entriesStore);
 
 const projectStore = useProjectsStore();
 const { getProjects, addProject } = projectStore;
@@ -43,7 +48,10 @@ onMounted(() => {
         variant="soft"
         class="mb-3"
       >
-        <DaySelector :selected-date="new Date()" />
+        <DaySelector
+          :selected-date="currentDate"
+          @update:selected-date="(e) => setCurrentDate(e)"
+        />
         <Navigation />
       </UCard>
     </nav>
@@ -52,8 +60,8 @@ onMounted(() => {
       <RouterView />
 
       <TrackedTime
-        :entries="entriesStore.entries"
-        @delete="(e) => console.log(e)"
+        :entries
+        :selected-date="currentDate"
       />
     </main>
   </UApp>

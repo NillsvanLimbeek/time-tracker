@@ -1,8 +1,17 @@
 <script setup lang="ts">
-const props = defineProps<{ entries: TimeEntry[] }>();
+interface Props {
+  entries: TimeEntry[];
+  selectedDate: Date;
+}
+
+const props = defineProps<Props>();
 const emit = defineEmits<{
   (e: 'start' | 'edit' | 'delete', id: string): void;
 }>();
+
+const filteredEntries = computed(() => {
+  return props.entries.filter(entry => isSameDay(props.selectedDate, entry.date));
+});
 </script>
 
 <template>
@@ -26,7 +35,7 @@ const emit = defineEmits<{
       class="space-y-3"
     >
       <TrackedTimeItem
-        v-for="entry in entries"
+        v-for="entry in filteredEntries"
         :key="entry.id"
         :entry="entry"
         @start="(e) => emit('start', e)"

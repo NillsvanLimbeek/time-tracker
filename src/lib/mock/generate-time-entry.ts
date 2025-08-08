@@ -45,13 +45,13 @@ const taskDescriptions = [
 ];
 
 export function generateMockTimeEntry(): CreateTimeEntry {
-  const entryDate = faker.date.recent({ days: 30 });
+  const entryDate = faker.date.between({ from: startOfWeek(new Date()), to: endOfWeek(new Date()) });
 
   return {
     date: entryDate.toISOString().split('T')[0], // YYYY-MM-DD format
     description: faker.helpers.arrayElement(taskDescriptions),
     project: '',
-    time: Number.parseFloat(faker.number.float({ min: 0.25, max: 8, fractionDigits: 2 }).toFixed(2)),
+    time: faker.number.int({ min: 0, max: 60 * 60 * 8 }),
     color: `bg-${faker.helpers.arrayElement(tailwindColors)}-400` as const,
   };
 }
