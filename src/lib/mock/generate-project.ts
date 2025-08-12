@@ -1,17 +1,36 @@
-import { faker } from '@faker-js/faker'
-import { CreateProject } from '../models/Project';
+import type { CreateProject } from '../models/Project';
+import { faker } from '@faker-js/faker';
 
 const tailwindColors = [
-  'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal',
-  'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink',
-  'rose', 'slate', 'gray', 'zinc', 'neutral', 'stone'
+  'red',
+  'orange',
+  'amber',
+  'yellow',
+  'lime',
+  'green',
+  'emerald',
+  'teal',
+  'cyan',
+  'sky',
+  'blue',
+  'indigo',
+  'violet',
+  'purple',
+  'fuchsia',
+  'pink',
+  'rose',
+  'slate',
+  'gray',
+  'zinc',
+  'neutral',
+  'stone',
 ];
 
 export function generateMockProject(): CreateProject {
   return {
     name: faker.company.name(),
     color: `bg-${faker.helpers.arrayElement(tailwindColors)}-400` as const,
-    time_entries: []
+    time_entries: [],
   };
 }
 
