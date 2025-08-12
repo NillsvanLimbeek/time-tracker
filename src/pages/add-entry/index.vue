@@ -1,3 +1,8 @@
+<script setup lang="ts">
+const projectsStore = useProjectsStore();
+const { projects } = storeToRefs(projectsStore);
+</script>
+
 <template>
-  <h1>Add Entry</h1>
+  <AddEntry :projects />
 </template>

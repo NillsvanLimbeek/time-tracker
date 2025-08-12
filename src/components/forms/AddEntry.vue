@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import type { FormSubmitEvent } from '@nuxt/ui';
 
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = defineProps<Props>();
 const emit = defineEmits<{
   (e: 'submit', data: CreateTimeEntry): void;
 }>();
@@ -11,6 +16,13 @@ const timerStore = useTimerStore();
 const state = reactive<Partial<AddEntry>>({
   project: undefined,
   workingOn: undefined,
+});
+
+const projectsSelect = computed(() => {
+  if (!projects)
+    return [];
+
+  return projects.map(project => ({ label: project.name, value: project.id, color: project.color }));
 });
 
 function onSubmit(event: FormSubmitEvent<AddEntry>): void {
@@ -32,7 +44,7 @@ function getColor(value: string | undefined): `bg-${string}-400` {
     return 'bg-gray-400';
   }
 
-  const color = SELECT_ITEMS.value.find((item) => item.value === value)?.color;
+  const color = projectsSelect.value.find(item => item.value === value)?.color;
 
   if (!color) {
     return 'bg-gray-400';
@@ -56,10 +68,11 @@ function getColor(value: string | undefined): `bg-${string}-400` {
       >
         <USelect
           v-model="state.project"
-          placeholder="Select a project"
-          :items="SELECT_ITEMS"
+          :placeholder="!projectsSelect.length ? 'No projects found' : 'Select a project'"
+          :items="projectsSelect"
           class="w-full"
           size="xl"
+          :disabled="!projectsSelect.length"
         >
           <template #leading="{ modelValue }">
             <div

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { VueQueryDevtools } from '@tanstack/vue-query-devtools';
 import AddProject from './components/modals/AddProject.vue';
 
 const dateStore = useDateStore();
@@ -6,19 +7,17 @@ const { currentDate } = storeToRefs(dateStore);
 const { setCurrentDate } = dateStore;
 
 const entriesStore = useEntriesStore();
-const { getTimeEntries } = entriesStore;
+const { useFetchTimeEntries } = entriesStore;
 const { entries } = storeToRefs(entriesStore);
 
 const projectStore = useProjectsStore();
-const { getProjects, addProject } = projectStore;
+const { useFetchProjects, addProject } = projectStore;
 
 const overlay = useOverlay();
 const addProjectModal = overlay.create(AddProject);
 
-onMounted(() => {
-  getProjects();
-  getTimeEntries();
-});
+useFetchProjects();
+useFetchTimeEntries();
 </script>
 
 <template>
@@ -64,5 +63,7 @@ onMounted(() => {
         :selected-date="currentDate"
       />
     </main>
+
+    <VueQueryDevtools />
   </UApp>
 </template>

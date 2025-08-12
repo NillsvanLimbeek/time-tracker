@@ -3,17 +3,25 @@ const entriesStore = useEntriesStore();
 
 const timerStore = useTimerStore();
 const { stopTimer, startTimer, resetTimer } = timerStore;
+const { formattedTime, isRunning } = storeToRefs(timerStore);
+
+const projectStore = useProjectsStore();
+const { projects } = storeToRefs(projectStore);
 </script>
 
 <template>
   <UCard variant="soft">
     <Timer
-      :formatted-time="timerStore.formattedTime"
-      :is-running="timerStore.isRunning"
+      :formatted-time="formattedTime"
+      :is-running="isRunning"
       @start="startTimer"
       @stop="stopTimer"
       @reset="resetTimer"
     />
-    <AddEntry @submit="(e) => entriesStore.addTimeEntry(e)" />
+
+    <AddEntry
+      :projects
+      @submit="(e) => entriesStore.addTimeEntry(e)"
+    />
   </UCard>
 </template>
